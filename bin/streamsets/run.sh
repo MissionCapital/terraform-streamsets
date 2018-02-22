@@ -28,9 +28,12 @@ systemctl daemon-reload
 
 # set up etc properties
 mkdir /etc/sdc
-cp -R $STREAMSETS_DIR/etc/* /etc/sdc # defaults
-cp $CONF_DIR/sdc.properties /etc/sdc/sdc.properties # specific override
-cp $CONF_DIR/form-realm.properties /etc/sdc/form-realm.properties # specific override
+# defaults
+cp -R $STREAMSETS_DIR/etc/* /etc/sdc
+# specific overrides
+cp $CONF_DIR/sdc.properties /etc/sdc/sdc.properties 
+cp $CONF_DIR/form-realm.properties /etc/sdc/form-realm.properties 
+cp $CONF_DIR/sdc-security.policy /etc/sdc/sdc-security.policy 
 chown -R sdc:sdc /etc/sdc
 
 # set up log directory
@@ -40,6 +43,13 @@ chown sdc:sdc /var/log/sdc
 # set up lib directory
 mkdir /var/lib/sdc
 chown sdc:sdc /var/lib/sdc
+
+# set up external library directory
+mkdir /opt/local/sdc-extras
+chown sdc:sdc /opt/local/sdc-extras
+
+# make sure our sdc user has permission to modify its resources
+chown -R sdc:sdc $STREAMSETS_DIR/streamsets-libs
 
 # start up the data collector
 systemctl start sdc

@@ -18,6 +18,9 @@
 # under the License.
 #
 #
+# Modifications copyright (C) 2018 Mission Capital Advisors
+#   - Changed the SDC_HOME to /opt/local instead of /opt
+#
 
 [Unit]
 Description=StreamSets Data Collector (SDC)
